@@ -1,3 +1,7 @@
+GET http://localhost:3000
+? login = true
+<<< ERROR
+
 POST http://localhost:3000
 ? login = true
 <<<
