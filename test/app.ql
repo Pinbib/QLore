@@ -1,27 +1,31 @@
-GET http://localhost:3000
+$ URl = http://localhost:3000
+
+! --yellow URl: @URL
+
+GET @URl
 ? login = true
 <<< ERROR
 
-POST http://localhost:3000
+POST @URL
 ? login = true
 <<<
 
-DELETE http://localhost:3000
+DELETE @URL
 ? login = true
 <<<
 
-PUT http://localhost:3000
+PUT @URL
 ? login = true
 <<<
 
-PATCH http://localhost:3000
+PATCH @URL
 ? login = true
 <<<
 
-HEAD http://localhost:3000
+HEAD @URL
 ? login = true
 <<<
 
-OPTIONS http://localhost:3000
+OPTIONS @URL
 ? login = true
 <<<
