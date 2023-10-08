@@ -9,8 +9,8 @@
 
 # Installation
 
-Go to [QLore](https://pinbib.github.io/QLore/) and select the file for your operating system.
-After installation, you need to move the file to the directory for Windows - C:/Windows/System32, and for MacOs and Linux - /usr/bin.
+Go to [QLore](https://pinbib.github.io/QLore/) and select the file for your operating system. After installation, you
+need to move the file to the directory for Windows - C:/Windows/System32, and for MacOs and Linux - /usr/bin.
 
 To move the file to /usr/bin, run the following commands:
 
@@ -20,17 +20,24 @@ sudo cp QLore /usr/bin/
 sudo chmod +x /usr/bin/QLore
 ```
 
-If after executing the command ```qlore version`` you receive a text like <span style="color: green;">QLore: [version]</span> then everything was successful.
+If after executing the command ```qlore version``` you receive a text like <span style="color: green;">
+QLore: [version]</span> then everything was successful.
 
 ## VS code
 
-If you use VSCode, then you can install highlighting and a snippet for more convenient use of QLore, to do this, go to the [QLore](https://pinbib.github.io/QLore/) website and click on the "VSCode" button, after which it will start installation of a .zip archive containing the necessary extensions ([how to install an extension from a .vsix file can be found here](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix) ) .
+If you use VSCode, then you can install highlighting and a snippet for more convenient use of QLore, to do this, go to
+the [QLore](https://pinbib.github.io/QLore/) website and click on the "VSCode" button, after which it will start
+installation of a .zip archive containing the necessary
+extensions ([how to install an extension from a .vsix file can be found here](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix) )
+.
 
 # Syntax
 
 The code to run the script must be written in the .ql file
 
-For tests, run the server using the express example of [this](https://github.com/Pinbib/QLore/blob/main/test/server.js) (install express and body-parser before starting). This is a server startup script on localhost:3000, which will generate an error response when you change the login parameters.
+For tests, run the server using the express example
+of [this](https://github.com/Pinbib/QLore/blob/main/test/server.js) (install express before starting). This is a server
+startup script on localhost:3000, which will generate an error response when you change the login parameters.
 
 ## Create a request
 
@@ -39,7 +46,7 @@ There are seven request types in total (POST, GET, PUT, PATCH, HEAD, DELETE, OPT
 This is how the request is viewed in code:
 
 <pre>
-<span style="color: blueviolet">[REQUEST]</span> [url]
+<span style="color: blueviolet">[REQUEST]</span> [url] 
 </pre>
 
 REQUEST - this type of request (upper case)
@@ -67,6 +74,40 @@ This is what the complete code should look like:
 <span style="color: rgb(90, 90, 255)">? </span>login = true
 </pre>
 
+## Creating variables
+
+Variables are created using the "$" command:
+
+<pre>
+<span style="color: rgb(90, 90, 255)">$ </span>[var_name] [= or ::] [value]
+</pre>
+
+var_name is the variable name without spaces
+
+followed by = or ::
+
+value - this value will be entered into the variable
+
+Variables can be accessed from anywhere using the "@" symbol:
+
+<pre>
+<span style="color: rgb(90, 90, 255)">$ </span>login = true
+<span style="color: blueviolet">GET</span> http://localhost:3000
+<span style="color: rgb(90, 90, 255)">? </span>login = <span style="color: rgb(127, 255, 105);">@login</span>
+</pre>
+
+## Output to the console
+
+Output to the console is via the "!" command:
+
+<pre>
+<span style="color: rgb(90, 90, 255)">! </span>[parameters] [value]
+</pre>
+
+value - this value will be entered into the variable
+
+parameters - these are parameters for text styling (--red, --green, --yellow)
+
 ## Dispatch
 
 To send a request, you must first create it (as shown above), then select this code:
@@ -75,7 +116,9 @@ To send a request, you must first create it (as shown above), then select this c
 <span style="color: blue"><<< [OPTIONS SEPARATED BY SPACE]</span>
 </pre>
 
-PARAMETERS SEPARATED BY SPACE - for parameters that can only be disabled by parameter, there are four (ERROR, SUCCESS, REQUEST, REQUEST_END), and they must be impersonated in upper case, and if there are several of them, separated by a space.
+PARAMETERS SEPARATED BY SPACE - for parameters that can only be disabled by parameter, there are four (ERROR, SUCCESS,
+REQUEST, REQUEST_END), and they must be impersonated in upper case, and if there are several of them, separated by a
+space.
 
 ERROR—Disable displaying request errors.
 
@@ -135,4 +178,5 @@ The request to http://localhost:3000?login=true is completed.
 
 # P.S
 
-This documentation was translated into English using Google Translator, most likely there will be a lot of errors here. (And this text too :)
+This documentation was translated into English using Google Translator, most likely there will be a lot of errors
+here. (And this text too :)
