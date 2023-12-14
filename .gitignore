@@ -1,3 +1,4 @@
 /node_modules
 /.idea
-/src
+/src/app.js
+/src/build.js
