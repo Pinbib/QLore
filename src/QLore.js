@@ -1,4 +1,4 @@
-process.env.VERSION = "0.0.5";
+process.env.VERSION = "0.0.6";
 
 const fs = require("fs");
 const VCate = require("vcate");

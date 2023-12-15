@@ -259,22 +259,10 @@ function executor(Coms = []) {
             let url = genUrl(Com.url, Com.arg);
 
             if (url) {
-                if (Com.type === "GET") {
-                    Axi.GET(url, Com);
-                } else if (Com.type === "POST") {
-                    Axi.POST(url, Com);
-                } else if (Com.type === "DELETE") {
-                    Axi.DELETE(url, Com)
-                } else if (Com.type === "PUT") {
-                    Axi.PUT(url, Com)
-                } else if (Com.type === "PATCH") {
-                    Axi.PATCH(url, Com)
-                } else if (Com.type === "HEAD") {
-                    Axi.HEAD(url, Com)
-                } else if (Com.type === "OPTIONS") {
-                    Axi.OPTIONS(url, Com)
-                } else if (Com.type === "ALL") {
-                    Axi.ALL(url, Com)
+                let req = Axi[Com.type];
+
+                if (req !== undefined) {
+                    req(url, Com);
                 } else {
                     Console.error("Unknown type of request.");
                     stop();

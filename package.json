@@ -1,23 +1,24 @@
 {
   "name": "qlore",
-  "version": "0.0.5",
-  "description": "",
+  "version": "0.0.6",
+  "description": "QLore is a tool for testing servers using simple scripts.",
   "main": "src/QLore.js",
   "scripts": {},
   "author": "PinBib",
   "license": "ISC",
   "dependencies": {
-	"axios": "^0.27.2",
-	"chalk": "^2.4.2",
-	"is-url": "^1.2.4",
-	"vcate": "^0.0.4"
+    "axios": "^0.27.2",
+    "chalk": "^2.4.2",
+    "is-url": "^1.2.4",
+    "pkg": "^5.8.1",
+    "vcate": "^0.0.4"
   },
   "devDependencies": {
-	"express": "^4.18.2"
+    "express": "^4.18.2"
   },
   "pkg": {
-	"assets": [
-	  "node_modules/axios/**/*"
-	]
+    "assets": [
+      "node_modules/axios/**/*"
+    ]
   }
 }
