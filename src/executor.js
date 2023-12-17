@@ -1,8 +1,6 @@
 const axios = require('axios');
 const Console = require("vcate/Console");
 
-let PROTOCOL = [];
-
 function date() {
     const currentDate = new Date();
     const day = currentDate.getDate();
@@ -14,7 +12,7 @@ function date() {
 }
 
 function isUrl(url = "") {
-    return PROTOCOL.includes(url.split("://")[0]);
+    return ["http", "https"].includes(url.split("://")[0]);
 }
 
 function genUrl(url = "String", data = {}) {
@@ -284,15 +282,6 @@ function executor(Coms = []) {
                 }
             } else {
                 Console.log(Com.value)
-            }
-        } else if (Com.type === "PROTOCOL_ADD") {
-            if (!PROTOCOL.includes(Com.value)) PROTOCOL.push(Com.value);
-        } else if (Com.type === "PROTOCOL_SET") {
-            if (!PROTOCOL.includes(Com.id)) {
-                PROTOCOL.push(Com.value);
-            } else {
-                PROTOCOL.splice(PROTOCOL.indexOf(Com.id), 1);
-                PROTOCOL.push(Com.value);
             }
         } else {
             Console.error(`Request number ${i + 1} was not closed.`);

@@ -1,6 +1,7 @@
-const pkg = require("pkg");
+const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const Console = require("vcate/Console");
 
 let VERSION = "0.0.5";
 
@@ -18,5 +19,12 @@ platforms.forEach(el => {
         }
     }
 
-    pkg.exec(['--target', `node18-${el}-x64`, '--output', path.join("./", "PKG", el, file), path.join("./", "src", file + ".js")]);
+    exec(`npx pkg ./src/QLore.js --targets node18-${el} --output ./PKG/${el}/QLore`, (err, stdout, stderr) => {
+        if (err) {
+            Console.error(`Error witch building file in the ${el}.`)
+            console.log(err)
+        } else {
+            Console.confirm(`Building file in the ${el} successful.`)
+        }
+    });
 });

@@ -127,34 +127,6 @@ function reader(src) {
                     });
                 }
                 break;
-            case "INIT":
-                if (line[1]) {
-                    ComList.push({
-                        type: "PROTOCOL_ADD",
-                        value: line[1]
-                    });
-                } else {
-                    Console.info("You cannot leave an empty initialization.");
-                    stop();
-                }
-                break;
-            case "#INIT":
-                if (line[1]) {
-                    if (line[2]) {
-                        ComList.push({
-                            type: "PROTOCOL_SET",
-                            value: line[2],
-                            id: line[1].toLowerCase()
-                        });
-                    } else {
-                        Console.info("You cannot leave an empty initialization.");
-                        stop();
-                    }
-                } else {
-                    Console.info("You cannot leave an empty initialization.");
-                    stop();
-                }
-                break;
             default:
                 if (line[0] === "GET" || line[0] === "DELETE" || line[0] === "POST" || line[0] === "PUT" || line[0] === "PATCH" || line[0] === "HEAD" || line[0] === "OPTIONS" || line[0] === "ALL") {
                     if (!Com.type) {

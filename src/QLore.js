@@ -21,16 +21,6 @@ cat.add("run", (argv, option) => {
 
     if (option.path) {
         let read = [];
-        if (!option.p) {
-            read.push({
-                type: "PROTOCOL_ADD",
-                value: "http"
-            });
-            read.push({
-                type: "PROTOCOL_ADD",
-                value: "https"
-            });
-        }
 
         read = [...read, ...reader(option.path)];
 
@@ -45,14 +35,6 @@ cat.add("run", (argv, option) => {
             return true;
         } else if (argv.includes("--cls")) {
             cat.argv.splice(argv.indexOf("--cls"));
-            return true;
-        } else {
-            return false;
-        }
-    },
-    p: (argv) => {
-        if (argv.includes("--p")) {
-            cat.argv.splice(argv.indexOf("--p"));
             return true;
         } else {
             return false;
