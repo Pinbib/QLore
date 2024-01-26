@@ -3,21 +3,21 @@ const Console = require("vcate/Console");
 
 function reader(src) {
     let ComList = [];
-    let varList = {
+    const varList = {
         __version: process.env.VERSION
     };
 
-    let lines = fs.readFileSync(src, "utf-8").split("\n").filter(val => val.trim() !== "");
+    const lines = fs.readFileSync(src, "utf-8").split("\n").filter(val => val.trim() !== "");
 
     let Com = {};
     for (let i = 0; i < lines.length; i++) {
-        function stop() {
+        const stop = () => {
             ComList = undefined;
             Com = {};
             i += lines.length * 2;
         }
 
-        let line = lines[i].trim().replace(/\s+/gm, " ").replace(/@(\S+)/gm, (m, word) => varList[word.toLowerCase()]).split(" ");
+        const line = lines[i].trim().replace(/\s+/gm, " ").replace(/@(\S+)/gm, (m, word) => varList[word.toLowerCase()]).split(" ");
 
         switch (line[0]) {
             case "$":
@@ -128,7 +128,7 @@ function reader(src) {
                 }
                 break;
             default:
-                if (line[0] === "GET" || line[0] === "DELETE" || line[0] === "POST" || line[0] === "PUT" || line[0] === "PATCH" || line[0] === "HEAD" || line[0] === "OPTIONS" || line[0] === "ALL") {
+                if (["GET", "DELETE", "POST", "PUT", "PATCH", "HEAD", "OPTIONS"].includes(line[0])) {
                     if (!Com.type) {
                         if (line[1]) {
                             Com.url = line.slice(1).join(" ");

@@ -3,11 +3,11 @@ const fs = require("fs");
 const path = require("path");
 const Console = require("vcate/Console");
 
-let VERSION = "0.0.5";
+const VERSION = "0.0.6";
 
-let platforms = ["linux", "macos", "win"];
+const platforms = ["linux", "macos", "win"];
 
-let file = path.parse(path.basename("./src/QLore.js")).name;
+const file = path.parse(path.basename("./src/QLore.js")).name;
 
 
 platforms.forEach(el => {
@@ -19,7 +19,7 @@ platforms.forEach(el => {
         }
     }
 
-    exec(`npx pkg ./src/QLore.js --targets node18-${el} --output ./PKG/${el}/QLore`, (err, stdout, stderr) => {
+    exec(`npx pkg ./src/QLore.js --targets node18-${el} --output ./PKG/${el}/QLore`, (err) => {
         if (err) {
             Console.error(`Error witch building file in the ${el}.`)
             console.log(err)

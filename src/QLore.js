@@ -1,4 +1,4 @@
-process.env.VERSION = "0.0.6";
+process.env.VERSION = "0.0.7";
 
 const fs = require("fs");
 const VCate = require("vcate");
@@ -8,7 +8,7 @@ const executor = require("./executor");
 const path = require("path");
 const axios = require("axios");
 
-let cat = new VCate(process.argv);
+const cat = new VCate(process.argv);
 
 cat.notFound = () => Console.error("Unknown command.");
 
@@ -42,7 +42,7 @@ cat.add("run", (argv, option) => {
     },
     path: (argv) => {
         if (argv[3]) {
-            let pat = argv.slice(3).join("");
+            const pat = argv.slice(3).join("");
             if (fs.existsSync(pat)) {
                 if (path.extname(pat) === ".ql") {
                     return pat;
@@ -63,7 +63,7 @@ cat.add("run", (argv, option) => {
 
 cat.add("update", () => {
     axios.get("https://raw.githubusercontent.com/Pinbib/QLore/main/package.json").then((res) => {
-        let pack = res.data;
+        const pack = res.data;
 
         if (pack.version !== process.env.VERSION) {
             if (Number(process.env.VERSION.replace(/\.+/gm, "")) < Number(pack.version.replace(/\.+/gm, ""))) {

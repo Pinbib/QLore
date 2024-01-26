@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require("axios");
 const Console = require("vcate/Console");
 
 function date() {
@@ -15,7 +15,7 @@ function isUrl(url = "") {
     return ["http", "https"].includes(url.split("://")[0]);
 }
 
-function genUrl(url = "String", data = {}) {
+function genUrl(url, data = {}) {
     try {
         if (typeof url == "string" && url.trim() !== "" && isUrl(url)) {
             let _url = url.trim();
@@ -33,6 +33,7 @@ function genUrl(url = "String", data = {}) {
             } else return _url;
         } else throw new Error();
     } catch (err) {
+        return;
     }
 }
 
@@ -63,7 +64,7 @@ class Axi {
             }
             console.log(" ");
         });
-    };
+    }
 
     static POST(url, Com) {
         axios.post(url).then((res) => {
@@ -91,7 +92,7 @@ class Axi {
             }
             console.log(" ");
         });
-    };
+    }
 
     static DELETE(url, Com) {
         axios.delete(url).then((res) => {
@@ -119,7 +120,7 @@ class Axi {
             }
             console.log(" ");
         });
-    };
+    }
 
     static PUT(url, Com) {
         axios.put(url).then((res) => {
@@ -147,7 +148,7 @@ class Axi {
             }
             console.log(" ");
         });
-    };
+    }
 
     static PATCH(url, Com) {
         axios.patch(url).then((res) => {
@@ -175,7 +176,7 @@ class Axi {
             }
             console.log(" ");
         });
-    };
+    }
 
     static HEAD(url, Com) {
         axios.head(url).then((res) => {
@@ -203,7 +204,7 @@ class Axi {
             }
             console.log(" ");
         });
-    };
+    }
 
     static OPTIONS(url, Com) {
         axios.options(url).then((res) => {
@@ -231,33 +232,21 @@ class Axi {
             }
             console.log(" ");
         });
-    };
-
-    static ALL(url, Com) {
-        this.GET(url, Com);
-        this.POST(url, Com);
-        this.DELETE(url, Com);
-        this.PUT(url, Com);
-        this.PATCH(url, Com);
-        this.HEAD(url, Com);
-        this.OPTIONS(url, Com);
-    };
+    }
 }
 
 function executor(Coms = []) {
 
     for (let i = 0; i < Coms.length; i++) {
-        function stop() {
-            i += Coms.length * 2
-        }
+        const stop = () => i = Coms.length * 2;
 
-        let Com = Coms[i];
+        const Com = Coms[i];
 
         if (Com.close) {
-            let url = genUrl(Com.url, Com.arg);
+            const url = genUrl(Com.url, Com.arg);
 
             if (url) {
-                let req = Axi[Com.type];
+                const req = Axi[Com.type];
 
                 if (req !== undefined) {
                     req(url, Com);
