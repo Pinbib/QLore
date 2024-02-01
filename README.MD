@@ -5,7 +5,7 @@
 ### Qlore is a tool for testing servers using simple and short scripts.
 
 [<img src="https://cdn1.iconfinder.com/data/icons/picons-social/57/github_rounded-512.png" width="30">](https://github.com/Pinbib/QLore#readme)
-[<img src="./favicon.ico" width="30">](https://pinbib.github.io/QLore/)
+[<img src="./favicon.ico" width="30">](https://pinbib.github.io/.qlore/)
 
 # Installation
 
@@ -95,6 +95,34 @@ Variables can be accessed from anywhere using the "@" symbol:
 <span style="color: blueviolet">GET</span> http://localhost:3000
 <span style="color: rgb(90, 90, 255)">? </span>login = <span style="color: rgb(127, 255, 105);">@login</span>
 </pre>
+
+## Import module
+
+Modules are used to increase the speed of writing large objects. 
+Modules are .js files with CommonJS syntax. In which the function is exported
+with the main parameter line: String[]
+
+<pre>
+<span style="color: yellow;"># </span> [module_name] [path/to/file.js]
+</pre>
+
+module_name is a module name
+
+path/to/file.js is a path to the module file
+
+## = or ::
+
+= - used to set a simple value
+
+:: - to set the value from the module
+
+<pre>
+[<span style="color: rgb(90, 90, 255)">$ </span>or <span style="color: rgb(90, 90, 255)">?</span>] :: [module_name] [arguments separated by space]
+</pre>
+
+module_name is a module name
+
+arguments separated by space - are the arguments that will be passed to the module
 
 ## Output to the console
 
