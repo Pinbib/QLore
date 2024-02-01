@@ -1,10 +1,14 @@
 const fs = require("fs");
+const path = require("path");
 const Console = require("vcate/Console");
 
 function reader(src) {
     let ComList = [];
     const varList = {
         __version: process.env.VERSION
+    };
+    const moduleList = {
+        __version: (line)=>process.env.VERSION
     };
 
     const lines = fs.readFileSync(src, "utf-8").split("\n").filter(val => val.trim() !== "");
@@ -17,21 +21,41 @@ function reader(src) {
             i += lines.length * 2;
         }
 
-        const line = lines[i].trim().replace(/\s+/gm, " ").replace(/@(\S+)/gm, (m, word) => varList[word.toLowerCase()]).split(" ");
+        const line = lines[i].trim().replace(/\s+/gm, " ").replace(/@(\S+)\s?/gm, (m, word) => varList[word.toLowerCase()]).split(" ");
 
         switch (line[0]) {
             case "$":
                 if (line[1]) {
                     if (line[2]) {
-                        if (["=", "::"].includes(line[2]) > -1) {
+                        if (line[2]==="=") {
                             if (line[3]) {
                                 varList[line[1].toLowerCase()] = line.slice(3).join(" ");
                             } else {
                                 Console.error("A variable assignment was started but was set to an empty value.");
                                 stop();
                             }
+                        } else if(line[2]==="::"){
+                            if(line[3]){
+                                if(moduleList[line[3].toLowerCase()]){
+                                    let val = moduleList[line[3].toLowerCase()](line.slice(4));
+
+                                    if(val!==undefined){
+                                        if(typeof val==="object"){
+                                            varList[line[1].toLowerCase()] = JSON.stringify(val);
+                                        } else {
+                                            varList[line[1].toLowerCase()] = val.toString();
+                                        }
+                                    }
+                                } else {
+                                    Console.info("Module "+line[3]+" was not found.");
+                                    Com.arg[line[1]] = undefined;
+                                }
+                            } else {
+                                Console.error("A variable assignment was started but was set to an empty value.");
+                                stop();
+                            }
                         } else {
-                            Console.error("The appointment symbol should be equal to \"= \" or \"::\".");
+                            Console.error("The appointment symbol should be equal to \"=\" or \"::\".");
                             stop();
                         }
                     } else {
@@ -47,9 +71,29 @@ function reader(src) {
                     if (!Com.arg) Com.arg = {};
                     if (line[1]) {
                         if (line[2]) {
-                            if (["=", "::"].includes(line[2]) > -1) {
+                            if (line[2]==="=") {
                                 if (line[3]) {
                                     Com.arg[line[1]] = line.slice(3).join(" ");
+                                } else {
+                                    Console.error("The purpose of the argument was launched, but an empty value was set.");
+                                    stop();
+                                }
+                            } else if(line[2]==="::"){
+                                if(line[3]){
+                                    if(moduleList[line[3].toLowerCase()]){
+                                        let val = moduleList[line[3].toLowerCase()](line.slice(4));
+
+                                        if(val!==undefined){
+                                            if(typeof val==="object"){
+                                                Com.arg[line[1]] = JSON.stringify(val);
+                                            } else {
+                                                Com.arg[line[1]] = val.toString();
+                                            }
+                                        }
+                                    } else {
+                                        Console.info("Module "+line[3]+" was not found.");
+                                        Com.arg[line[1]] = undefined;
+                                    }
                                 } else {
                                     Console.error("The purpose of the argument was launched, but an empty value was set.");
                                     stop();
@@ -125,6 +169,45 @@ function reader(src) {
                         },
                         value: line.slice(1).join(" ")
                     });
+                }
+                break;
+            case "#":
+                if(line[1]){
+                    if(line[2]){
+                        if(!moduleList[line[1].toLowerCase()]){
+                            let pat = path.resolve(line.slice(2).join(" "));
+
+                            if(fs.existsSync(pat)){
+                                try{
+                                    let mod = require(pat);
+
+                                    if(typeof mod==="function"){
+                                        moduleList[line[1].toLowerCase()] = mod;
+                                    } else {
+                                        Console.error("A module must be a function.");
+                                        stop();
+                                    }
+                                } catch (err){
+                                    if(err){
+                                        Console.gerror("Error which trying import module.", ["Error: \n"+ JSON.stringify(err, null, 2)]);
+                                        stop()
+                                    }
+                                }
+                            } else {
+                                Console.error("The file does not exist.");
+                                stop();
+                            }
+                        } else {
+                            Console.error("Modules cannot be overwritten.");
+                            stop()
+                        }
+                    } else {
+                        Console.error("No module path was specified.");
+                        stop();
+                    }
+                } else {
+                    Console.error("No module name was specified.");
+                    stop();
                 }
                 break;
             default:

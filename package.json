@@ -1,6 +1,6 @@
 {
   "name": "qlore",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "QLore is a tool for testing servers using simple scripts.",
   "main": "src/QLore.js",
   "scripts": {},

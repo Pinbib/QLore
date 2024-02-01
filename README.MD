@@ -9,7 +9,7 @@
 
 # Installation
 
-Go to [QLore](https://pinbib.github.io/QLore/) and select the file for your operating system. After installation, you
+Go to [QLore](https://pinbib.github.io/.qlore/) and select the file for your operating system. After installation, you
 need to move the file to the directory for Windows - C:/Windows/System32, and for MacOs and Linux - /usr/bin.
 
 To move the file to /usr/bin, run the following commands:

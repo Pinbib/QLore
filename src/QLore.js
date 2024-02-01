@@ -1,4 +1,4 @@
-process.env.VERSION = "0.0.7";
+process.env.VERSION = "0.0.8";
 
 const fs = require("fs");
 const VCate = require("vcate");
@@ -17,16 +17,20 @@ cat.add("version", () => {
 });
 
 cat.add("run", (argv, option) => {
-    if (option.clear) console.clear();
+    try {
+        if (option.clear) console.clear();
 
-    if (option.path) {
-        let read = [];
+        if (option.path) {
+            let read = [];
 
-        read = [...read, ...reader(option.path)];
+            read = [...read, ...reader(option.path)];
 
-        if (read.length > 0) {
-            executor(read);
+            if (read.length > 0) {
+                executor(read);
+            }
         }
+    } catch (err){
+        if(err&&option.isDev) console.log(err);
     }
 }, {
     clear: (argv) => {
@@ -35,6 +39,17 @@ cat.add("run", (argv, option) => {
             return true;
         } else if (argv.includes("--cls")) {
             cat.argv.splice(argv.indexOf("--cls"));
+            return true;
+        } else {
+            return false;
+        }
+    },
+    isDev: (argv)=>{
+        if (argv.includes("-dev")) {
+            cat.argv.splice(argv.indexOf("-dev"));
+            return true;
+        } else if (argv.includes("--D")) {
+            cat.argv.splice(argv.indexOf("--D"));
             return true;
         } else {
             return false;
