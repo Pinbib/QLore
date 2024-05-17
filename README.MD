@@ -4,9 +4,6 @@
 
 ### Qlore is a tool for testing servers using simple and short scripts.
 
-[<img src="https://cdn1.iconfinder.com/data/icons/picons-social/57/github_rounded-512.png" width="30">](https://github.com/Pinbib/QLore#readme)
-[<img src="./favicon.ico" width="30">](https://pinbib.github.io/.qlore/)
-
 # Installation
 
 Go to [QLore](https://pinbib.github.io/.qlore/) and select the file for your operating system. After installation, you
@@ -20,7 +17,7 @@ sudo cp QLore /usr/bin/
 sudo chmod +x /usr/bin/QLore
 ```
 
-If after executing the command ```qlore version``` you receive a text like <span style="color: green;">
+If after executing the command `qlore version` you receive a text like <span style="color: green;">
 QLore: [version]</span> then everything was successful.
 
 ## VS code
@@ -33,7 +30,7 @@ extensions ([how to install an extension from a .vsix file can be found here](ht
 
 # Syntax
 
-The code to run the script must be written in the .ql file
+The code to run the script must be written in the `.ql` file
 
 For tests, run the server using the express example
 of [this](https://github.com/Pinbib/QLore/blob/main/test/server.js) (install express before starting). This is a server
@@ -41,7 +38,7 @@ startup script on localhost:3000, which will generate an error response when you
 
 ## Create a request
 
-There are seven request types in total (POST, GET, PUT, PATCH, HEAD, DELETE, OPTIONS).
+There are seven request types in total (`POST`, `GET`, `PUT`, `PATCH`, `HEAD`, `DELETE`, `OPTIONS`).
 
 This is how the request is viewed in code:
 
@@ -49,9 +46,9 @@ This is how the request is viewed in code:
 <span style="color: blueviolet">[REQUEST]</span> [url] 
 </pre>
 
-REQUEST - this type of request (upper case)
+`REQUEST` - this type of request (upper case)
 
-url is where the request will be sent (be sure to start with http:// or https://)
+`url` - is where the request will be sent (be sure to start with http:// or https://)
 
 ## Request parameters
 
@@ -61,11 +58,11 @@ To add a parameter to a request, you must first create it (as shown above), then
 <span style="color: rgb(90, 90, 255)">? </span>[parameter_name] [= or ::] [value]
 </pre>
 
-parameter_name is the parameter name without spaces
+`parameter_name` - is the parameter name without spaces
 
-followed by = or ::
+followed by `=` or `::`
 
-value - this value will be entered into the parameter
+`value` - this value will be entered into the parameter
 
 This is what the complete code should look like:
 
@@ -76,19 +73,19 @@ This is what the complete code should look like:
 
 ## Creating variables
 
-Variables are created using the "$" command:
+Variables are created using the `$` command:
 
 <pre>
 <span style="color: rgb(90, 90, 255)">$ </span>[var_name] [= or ::] [value]
 </pre>
 
-var_name is the variable name without spaces
+`var_name` - is the variable name without spaces
 
-followed by = or ::
+followed by `=` or `::`
 
-value - this value will be entered into the variable
+`value` - this value will be entered into the variable
 
-Variables can be accessed from anywhere using the "@" symbol:
+Variables can be accessed from anywhere using the `@` symbol:
 
 <pre>
 <span style="color: rgb(90, 90, 255)">$ </span>login = true
@@ -99,42 +96,42 @@ Variables can be accessed from anywhere using the "@" symbol:
 ## Import module
 
 Modules are used to increase the speed of writing large objects. 
-Modules are .js files with CommonJS syntax. In which the function is exported
-with the main parameter line: String[]
+Modules are `.js` files with CommonJS syntax. In which the function is exported
+with the main parameter `line: String[]`
 
 <pre>
 <span style="color: yellow;"># </span> [module_name] [path/to/file.js]
 </pre>
 
-module_name is a module name
+`module_name` - is a module name
 
-path/to/file.js is a path to the module file
+`path/to/file.js` - is a path to the module file
 
 ## = or ::
 
-= - used to set a simple value
+`=` - used to set a simple value
 
-:: - to set the value from the module
+`::` - to set the value from the module
 
 <pre>
 [<span style="color: rgb(90, 90, 255)">$ </span>or <span style="color: rgb(90, 90, 255)">?</span>] :: [module_name] [arguments separated by space]
 </pre>
 
-module_name is a module name
+`module_name` - is a module name
 
-arguments separated by space - are the arguments that will be passed to the module
+`arguments separated by space` - are the arguments that will be passed to the module
 
 ## Output to the console
 
-Output to the console is via the "!" command:
+Output to the console is via the `!` command:
 
 <pre>
 <span style="color: rgb(90, 90, 255)">! </span>[parameters] [value]
 </pre>
 
-value - this value will be entered into the variable
+`value` - this value will be entered into the variable
 
-parameters - these are parameters for text styling (--red, --green, --yellow)
+`parameters` - these are parameters for text styling (`--red`, `--green`, `--yellow`)
 
 ## Dispatch
 
@@ -144,29 +141,29 @@ To send a request, you must first create it (as shown above), then select this c
 <span style="color: blue"><<< [OPTIONS SEPARATED BY SPACE]</span>
 </pre>
 
-PARAMETERS SEPARATED BY SPACE - for parameters that can only be disabled by parameter, there are four (ERROR, SUCCESS,
-REQUEST, REQUEST_END), and they must be impersonated in upper case, and if there are several of them, separated by a
+`PARAMETERS SEPARATED BY SPACE` - for parameters that can only be disabled by parameter, there are four (`ERROR`, `SUCCESS`,
+`REQUEST`, `REQUEST_END`), and they must be impersonated in upper case, and if there are several of them, separated by a
 space.
 
-ERROR—Disable displaying request errors.
+`ERROR` — Disable displaying request errors.
 
 Example: <prev>
 <span style="color: blue"><<< ERROR</span>
 </pre>
 
-SUCCESS - disable response information output
+`SUCCESS` - disable response information output
 
 Example: <prev>
 <span style="color: blue"><<< SUCCESS</span>
 </pre>
 
-REQUEST - disable the display of information about sending a request
+`REQUEST` - disable the display of information about sending a request
 
 Example: <prev>
 <span style="color: blue"><<< REQUEST</span>
 </pre>
 
-REQUEST_END - disable displaying information about request completion
+`REQUEST_END` - disable displaying information about request completion
 
 Example: <prev>
 <span style="color: blue"><<< REQUEST_END</span>
