@@ -16,6 +16,8 @@ cat.add("version", () => {
     Console.confirm(`QLore: ${process.env.VERSION}`);
 });
 
+cat.alias("version", "--v");
+
 cat.add("run", (argv, option) => {
     try {
         if (option.clear) console.clear();
