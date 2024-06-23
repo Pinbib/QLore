@@ -1,6 +1,6 @@
 {
   "name": "qlore",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "QLore is a tool for testing servers using simple scripts.",
   "main": "src/QLore.js",
   "scripts": {},
@@ -10,6 +10,7 @@
     "axios": "^0.27.2",
     "chalk": "^2.4.2",
     "pkg": "^5.8.1",
+    "qp-color": "^0.0.1",
     "vcate": "^0.1.5"
   },
   "devDependencies": {

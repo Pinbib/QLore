@@ -1,8 +1,8 @@
-process.env.VERSION = "0.0.8";
+process.env.VERSION = "0.0.9";
 
 const fs = require("fs");
-const VCate = require("vcate");
-const Console = require("vcate/Console");
+const VCate = require("vcate").default;
+const Console = require("./Console.js");
 const reader = require("./reader");
 const executor = require("./executor");
 const path = require("path");
@@ -18,7 +18,7 @@ cat.add("version", () => {
 
 cat.alias("version", "--v");
 
-cat.add("run", (argv, option) => {
+cat.add("run", (argv, flags, option) => {
     try {
         if (option.clear) console.clear();
 
@@ -32,7 +32,9 @@ cat.add("run", (argv, option) => {
             }
         }
     } catch (err){
-        if(err&&option.isDev) console.log(err);
+        if(err) {
+            if(option.isDev) console.log(err);
+        }
     }
 }, {
     clear: (argv) => {
@@ -58,8 +60,8 @@ cat.add("run", (argv, option) => {
         }
     },
     path: (argv) => {
-        if (argv[3]) {
-            const pat = argv.slice(3).join("");
+        if (argv[0]) {
+            const pat = argv.slice(0).join("");
             if (fs.existsSync(pat)) {
                 if (path.extname(pat) === ".ql") {
                     return pat;

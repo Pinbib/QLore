@@ -1,5 +1,5 @@
 const axios = require("axios");
-const Console = require("vcate/Console");
+const Console = require("./Console.js");
 
 function date() {
     const currentDate = new Date();

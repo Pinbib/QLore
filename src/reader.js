@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Console = require("vcate/Console");
+const Console = require("./Console.js");
 
 function reader(src) {
     let ComList = [];

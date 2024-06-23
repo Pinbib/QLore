@@ -1,9 +1,9 @@
 const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
-const Console = require("vcate/Console");
+const Console = require("./src/Console.js");
 
-const VERSION = "0.0.6";
+const VERSION = "0.0.8";
 
 const platforms = ["linux", "macos", "win"];
 
