@@ -2,19 +2,25 @@
 
 <img src="./QLore.png" width="500px" heigth="500px">
 
-### Qlore is a tool for testing servers using simple and short scripts.
+### Qlore is a tool for testing servers using simple and short scripts
 
 # Installation
 
-Go to [QLore](https://pinbib.github.io/.qlore/) and select the file for your operating system. After installation, you
-need to move the file to the directory for Windows - C:/Windows/System32, and for MacOs and Linux - /usr/bin.
+Go to [QLore](https://pinbib.github.io/.qlore/) and select the file for your operating system.
+After downloading, for Windows, open a terminal with administrator rights in the folder where the file was downloaded and execute the command:
 
-To move the file to /usr/bin, run the following commands:
+```cmd
+move QLore.exe C:/Windows/System32
+```
+
+For Linux, open a terminal in the folder where the file was downloaded and execute the following commands:
 
 ``` bash
-sudo cp QLore /usr/bin/
+sudo mv QLore /usr/local/bin
 
-sudo chmod +x /usr/bin/QLore
+sudo chmode +x /usr/local/bin/QLore
+
+sudo ln -s /usr/local/bin/QLore /usr/local/bin/qlore
 ```
 
 If after executing the command `qlore version` you receive a text like <span style="color: green;">
@@ -43,7 +49,7 @@ There are seven request types in total (`POST`, `GET`, `PUT`, `PATCH`, `HEAD`, `
 This is how the request is viewed in code:
 
 <pre>
-<span style="color: blueviolet">[REQUEST]</span> [url] 
+<span style="color: blueviolet">[REQUEST]</span> [url]
 </pre>
 
 `REQUEST` - this type of request (upper case)
@@ -95,7 +101,7 @@ Variables can be accessed from anywhere using the `@` symbol:
 
 ## Import module
 
-Modules are used to increase the speed of writing large objects. 
+Modules are used to increase the speed of writing large objects.
 Modules are `.js` files with CommonJS syntax. In which the function is exported
 with the main parameter `line: String[]`
 
@@ -107,7 +113,7 @@ with the main parameter `line: String[]`
 
 `path/to/file.js` - is a path to the module file
 
-## = or ::
+## = or
 
 `=` - used to set a simple value
 
